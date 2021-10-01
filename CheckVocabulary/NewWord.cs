@@ -38,6 +38,11 @@ namespace CheckVocabulary
         void InitVariables()
         {
             MyParam.parameter = SaveLoadParameter.Load_Parameter(MyParam.parameter) as MyParameter;
+            if (MyParam.parameter == null)
+            {
+                MyParam.parameter = new MyParameter();
+                MyParam.parameter.DefaultParameter();
+            }
             MyParam.parameter.PrintInfor();
             
             
@@ -65,6 +70,8 @@ namespace CheckVocabulary
             txtFileNewWord.Text = Path.GetFileName(MyParam.parameter.file_new_word);
             txtTimerCountdown.Text = MyParam.parameter.timer_count_down.ToString();
 
+            //Show answer
+            chbxEnableShow.Checked = MyParam.parameter.show_answer;
 
             //tab
             tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
@@ -73,6 +80,7 @@ namespace CheckVocabulary
             //Group
             groupBoxQuestion.ForeColor = SystemColors.Highlight;
             groupBoxScore.ForeColor = SystemColors.Highlight;
+            groupBoxCheck.ForeColor = SystemColors.Highlight;
         }
 
         private void TabControl_DrawItem(object sender, DrawItemEventArgs e)
@@ -116,6 +124,9 @@ namespace CheckVocabulary
             int timer;
             int.TryParse(txtTimerCountdown.Text, out timer);
             MyParam.parameter.timer_count_down = timer;
+
+            //Show answer
+            MyParam.parameter.show_answer = chbxEnableShow.Checked;
 
         }
 
@@ -251,8 +262,8 @@ namespace CheckVocabulary
                 timerCountDown.Enabled = false;
                 btnCountDown.Text = "Time out!";
                 btnCountDown.ForeColor = Color.Red;
-                //MyLib.ShowDlgWarning("Time out!");
-                btnCheckAnswer.PerformClick();
+                if(MyParam.parameter.show_answer)
+                    btnCheckAnswer.PerformClick();
             }
         }
         #endregion
@@ -298,11 +309,29 @@ namespace CheckVocabulary
             }
         }
 
+
+        void CheckNewWord()
+        {
+            if (String.IsNullOrEmpty(txtWordCheck.Text))
+                return;
+            string word_check = txtWordCheck.Text;
+            var answer = MyParam.list_vocabularies.Where(nw => nw.eng.ToLower().Contains(word_check.ToLower())).FirstOrDefault();
+            if (answer != null) 
+            { 
+                lbPhoetic.Text = answer.phonetic;
+                lbAnswer.Text = answer.meaning;
+            }
+            else
+                MyLib.ShowDlgWarning("Not found");
+        }
         private void Button_Main_Click(object sender, EventArgs e)
         {
             var name_btn = (sender as Button).Name;
             switch (name_btn)
             {
+                case "btnSubmit":
+                    CheckNewWord();
+                    break;
 
                 case "btnGenEnglish":
                     GenData(eTypeGen.English);

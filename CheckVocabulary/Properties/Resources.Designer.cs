@@ -143,6 +143,26 @@ namespace CheckVocabulary.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap submit {
+            get {
+                object obj = ResourceManager.GetObject("submit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap submit_64 {
+            get {
+                object obj = ResourceManager.GetObject("submit_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap united_kingdom {
             get {
                 object obj = ResourceManager.GetObject("united-kingdom", resourceCulture);

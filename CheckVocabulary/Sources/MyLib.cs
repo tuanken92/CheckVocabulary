@@ -132,6 +132,7 @@ namespace CheckVocabulary.Sources
             else
             {
                 MyLib.ShowDlgError($"Not found {MyDefine.file_config}");
+                param = null;
             }
 
             return param;
@@ -243,6 +244,7 @@ namespace CheckVocabulary.Sources
         public int timer_count_down = 0;
         public List<Player> list_player = null;
         public List<int> list_index = null;
+        public bool show_answer = false;
         public MyParameter()
         {
             list_index = new List<int>();
@@ -252,7 +254,7 @@ namespace CheckVocabulary.Sources
             //list_player.Add(new Player { name = "Lucy", score = 0 });
             //list_player.Add(new Player { name = "Anna", score = 0 });
 
-            timer_count_down = 30000;
+            timer_count_down = 15;
             file_new_word = MyDefine.file_excel;
         }
 
@@ -266,6 +268,19 @@ namespace CheckVocabulary.Sources
             {
                 player.Log();
             }
+        }
+
+        public void DefaultParameter()
+        {
+            list_index = new List<int>();
+            list_player = new List<Player>(4);
+            list_player.Add(new Player { name = "John", score = 0 });
+            list_player.Add(new Player { name = "Richard", score = 0 });
+            list_player.Add(new Player { name = "Lucy", score = 0 });
+            list_player.Add(new Player { name = "Anna", score = 0 });
+            timer_count_down = 15;
+            file_new_word = MyDefine.file_excel;
+            show_answer = false;
         }
     }
 

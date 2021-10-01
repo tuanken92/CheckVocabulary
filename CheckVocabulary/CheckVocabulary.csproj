@@ -177,6 +177,8 @@
     <Content Include="Pictures\man.png" />
     <Content Include="Pictures\questionnaire.png" />
     <Content Include="Pictures\save.png" />
+    <Content Include="Pictures\submit.png" />
+    <Content Include="Pictures\submit_64.png" />
     <Content Include="Pictures\united-kingdom.png" />
     <Content Include="Pictures\update.png" />
     <Content Include="Pictures\vietnam.png" />
